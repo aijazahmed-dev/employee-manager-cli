@@ -1,6 +1,6 @@
 # 👨‍💼 Employee Management CLI (Python + SQLite)
 
-A simple but powerful command-line Employee Management System built using Python and SQLite.
+A command-line Employee Management System built using Python and SQLite.
 
 ## Project Overview
 A simple but powerful **command-line Employee Management System** built using Python and SQLite.  
@@ -27,7 +27,7 @@ This project demonstrates core Python concepts including OOP, database handling,
 
 ## Installation
 
-```bash
+```
 git clone https://github.com/your-username/employee-manager-cli.git
 cd employee-manager-cli
 python -m venv .venv
@@ -37,39 +37,39 @@ pip install -r requirements.txt
 
 ## How to Run
 
-```bash
+```
 python app.py
 ```
 
 ## Example Commands
 
 ### Add Employee
-```bash
+```
 python app.py add --name "John Marker" --email "john@test.com" --department "IT" --position "Dev" --salary 50000 --joining-date 2026-01-01
 ```
 
 ### List Employees
-```bash
+```
 python app.py list
 ```
 
 ### Search Employee
-```bash
+```
 python app.py search --keyword "John"
 ```
 
 ### Update Employee
-```bash
+```
 python app.py update --id 1 --name "Updated Name" --email "new@test.com" --department "IT" --position "Senior" --salary 70000 --joining-date 2026-01-01
 ```
 
 ### Delete Employee
-```bash
+```
 python app.py delete --id 1
 ```
 
 ### Export CSV
-```bash
+```
 python app.py export --file employees.csv
 ```
 
@@ -77,6 +77,7 @@ python app.py export --file employees.csv
 Python 3.10+
 
 ## 📁 Project Structure
+```
 employee_manager/
 │
 ├── app.py
@@ -86,6 +87,7 @@ employee_manager/
 ├── employees.db
 ├── requirements.txt
 └── README.md
+```
 
 ## Notes
 - Database is auto-created (employees.db)
