@@ -3,3 +3,4 @@ pycache/
 *.pyc
 employees.db
 .DS_Store
+*.log
