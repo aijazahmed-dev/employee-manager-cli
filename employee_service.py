@@ -1,6 +1,7 @@
 import logging
 import sqlite3
 from typing import List
+import csv
 
 from database import DatabaseManager
 from employee import Employee
@@ -170,4 +171,42 @@ class EmployeeService:
 
         except sqlite3.Error:
             logger.exception("Delete failed.")
+            raise
+
+    def export_to_csv(self, file_path: str) -> None:
+        """Export all employees to a CSV file."""
+
+        employees = self.get_all_employees()
+
+        try:
+            with open(file_path, mode="w", newline="", encoding="utf-8") as file:
+                writer = csv.writer(file)
+
+                # Header
+                writer.writerow([
+                    "ID",
+                    "Full Name",
+                    "Email",
+                    "Department",
+                    "Position",
+                    "Salary",
+                    "Joining Date"
+                ])
+
+                # Data rows
+                for emp in employees:
+                    writer.writerow([
+                        emp.id,
+                        emp.full_name,
+                        emp.email,
+                        emp.department,
+                        emp.position,
+                        emp.salary,
+                        emp.joining_date
+                    ])
+
+            logger.info("Employees exported to CSV successfully.")
+
+        except Exception as e:
+            logger.exception(f"Failed to export employees to CSV: {e}")
             raise

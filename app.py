@@ -61,6 +61,7 @@ def create_parser() -> argparse.ArgumentParser:
         help="Joining date (YYYY-MM-DD)"
     )
 
+    # Update Employee Command
     update_parser = subparsers.add_parser(
     "update",
     help="Update an existing employee"
@@ -110,6 +111,7 @@ def create_parser() -> argparse.ArgumentParser:
     help="Joining date (YYYY-MM-DD)"
     )
 
+    # Delete Employee Command
     delete_parser = subparsers.add_parser(
     "delete",
     help="Delete an employee"
@@ -122,11 +124,13 @@ def create_parser() -> argparse.ArgumentParser:
     help="Employee ID"
     )
 
+    # List Employee Command
     subparsers.add_parser(
     "list",
     help="Display all employees"
     )
 
+    # Search Employee Command
     search_parser = subparsers.add_parser(
     "search",
     help="Search employees by name or email"
@@ -136,6 +140,18 @@ def create_parser() -> argparse.ArgumentParser:
     "--keyword",
     required=True,
     help="Employee name or email"
+    )
+
+    # Command for Export Data to CSV 
+    export_parser = subparsers.add_parser(
+    "export",
+    help="Export employees to CSV file"
+    )
+
+    export_parser.add_argument(
+    "--file",
+    required=True,
+    help="CSV file name (e.g., employees.csv)"
     )
 
     return parser
@@ -273,7 +289,13 @@ def handle_delete(service: EmployeeService, args) -> None:
     else:
         print("Employee not found.")
 
-        
+def handle_export(service: EmployeeService, args) -> None:
+    """Handle export to CSV command."""
+
+    service.export_to_csv(args.file)
+
+    print(f"✅ Employees exported successfully to {args.file}")
+
 
 def main() -> None:
     """Application entry point."""
@@ -303,6 +325,9 @@ def main() -> None:
 
         elif args.command == "delete":
             handle_delete(service, args)
+
+        elif args.command == "export":
+            handle_export(service, args)
         
     except Exception as e:
         print(f"Error: {e}")
